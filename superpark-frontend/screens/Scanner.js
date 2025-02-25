@@ -1,6 +1,9 @@
 import * as React from 'react';
-import {View, Text, Button, StyleSheet, Dimensions} from "react-native";
+import {View, Text, Button, StyleSheet, Dimensions, TouchableOpacity} from "react-native";
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+
+import sampleStyles from '../constants/SampleStyles';
+import {CustomLargeButton} from '../components/Button';
 
 // camera screen view
 const CameraScreen = ({scanned, setScanned, setData}) => {
@@ -41,8 +44,9 @@ const CameraScreen = ({scanned, setScanned, setData}) => {
 const DataScreen = ({data, setScanned}) => {
     return (
         <View>
-            <Text>Barcode Data: {data}</Text>
-            <Button onPress={() => setScanned(false)} title='Scan Again' />
+            <Text style={sampleStyles.labelText}>Barcode Data: </Text> 
+            <Text style={sampleStyles.valueText}>{data}</Text>
+            <CustomLargeButton title={'Scan Again'} onPress={() => setScanned(false)} />
         </View>
     );
 }
@@ -67,7 +71,7 @@ const ScannerScreen = () => {
     }
   
     return (
-        <View style={styles.containerStyle}>
+        <View style={sampleStyles.container}>
             {!scanned?
             <CameraScreen scanned={scanned} setScanned={setScanned} setData={setData}/>
             :<DataScreen data={data} setScanned={setScanned} />}

@@ -17,13 +17,13 @@ export default [
         iconName: 'settings'
     },
     {
+        name: 'Payment',
+        component: PaymentScreen,
+        iconName: 'logo-paypal'
+    },
+    {
         name: 'Scanner',
         component: ScannerScreen,
         iconName: 'scan'
     },
-    {
-        name: 'Payment',
-        component: PaymentScreen,
-        iconName: 'logo-paypal'
-    }
 ]

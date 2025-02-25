@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { View,Text, StyleSheet} from "react-native"
 
-import CustomButton from "../components/Button";
-import bootstrapDarkColors from "../constants/Colors";
+import {CustomButton} from "../components/Button";
+import sampleStyles from "../constants/SampleStyles";
 
 const PaymentScreen = () => {
     // temporary states to show random data before integration with backend
@@ -13,56 +13,33 @@ const PaymentScreen = () => {
     const [rate, setRate] = useState(3.4);
 
     return (
-        <View style={styles.container}>
-            <View style={styles.textView}>
-                <Text style={styles.labelText}>Session ID: </Text>
-                <Text style={styles.valueText}>{5}</Text>
+        <View style={sampleStyles.container}>
+            <View style={sampleStyles.textView}>
+                <Text style={sampleStyles.labelText}>Session ID: </Text>
+                <Text style={sampleStyles.valueText}>{5}</Text>
             </View>
 
-            <View style={styles.textView}>
-                <Text style={styles.labelText}>Driver ID: </Text>
-                <Text style={styles.valueText}>{17}</Text>
+            <View style={sampleStyles.textView}>
+                <Text style={sampleStyles.labelText}>Driver ID: </Text>
+                <Text style={sampleStyles.valueText}>{17}</Text>
             </View>
 
-            <View style={styles.textView}>
-                <Text style={styles.labelText}>Duration: </Text>
-                <Text style={styles.valueText}>{durationHr} hr {durationMin} min {durationSec} sec</Text>
+            <View style={sampleStyles.textView}>
+                <Text style={sampleStyles.labelText}>Duration: </Text>
+                <Text style={sampleStyles.valueText}>{durationHr} hr {durationMin} min {durationSec} sec</Text>
             </View>
 
-            <View style={styles.textView}>
-                <Text style={styles.labelText}>Cost: </Text>
-                <Text style={styles.valueText}> {(durationHr * 3600 + durationMin * 60 + durationSec) * rate}</Text>
+            <View style={sampleStyles.textView}>
+                <Text style={sampleStyles.labelText}>Cost: </Text>
+                <Text style={sampleStyles.valueText}> {(durationHr * 3600 + durationMin * 60 + durationSec) * rate}</Text>
             </View>
 
-            <View style={styles.textView}>
+            <View style={sampleStyles.textView}>
                 <CustomButton title={'Pay'} onPress={() => alert('Payment Confirmed')} />
             </View>
         </View>
     );
     
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: bootstrapDarkColors.background,
-        width: '100%',
-        height: '100%',
-    },
-    textView: {
-        padding: 10,
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    labelText: {
-        fontSize: 20,
-        color: bootstrapDarkColors.text,
-        marginBottom: 5,
-    },
-    valueText: {
-        fontSize: 20,
-        color: bootstrapDarkColors.textMuted,
-        fontWeight: 500,
-    },
-});
 
 export default PaymentScreen;

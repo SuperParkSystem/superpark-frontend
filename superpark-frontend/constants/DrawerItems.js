@@ -1,7 +1,7 @@
 import PaymentScreen from "../screens/Payment"
 import ProfileScreen from "../screens/Profile"
 import SettingScreen from "../screens/Settings"
-import PaymentScreen from "../screens/Paymentbak"
+import ScannerScreen from "../screens/Scanner"
 
 export default [
     {

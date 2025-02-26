@@ -15,6 +15,22 @@ const bootstrapDarkColors = {
     inputBorder: "#6C757D", // Input border color
     cardBg: "#2C3034", // Dark card background
   };
+
+
+const modernColors = {
+  background: "#000000", // Black Background
+  text: "#FFFFFF", // White Text
+  textMuted: "#B0B0B0", // Light Grey Label Text
+  primary: "#007BFF", // Blue for Buttons and Important Elements
+  darkBlue: "#003366", // Dark Blue for Clicked Button Borders
+  inputBg: "#1E1E1E", // Grey for Input Boxes
+  cardBg: "#48484A", // Dark Grey for Containers
+  buttonText: "#FFFFFF", // White for Button Text
+};
+
   
-export default bootstrapDarkColors;
+export {
+  bootstrapDarkColors,
+  modernColors
+};
   

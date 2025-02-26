@@ -1,4 +1,4 @@
-import bootstrapDarkColors from "./Colors";
+import {bootstrapDarkColors} from "./Colors";
 
 const sampleStyles = {
     container: {

@@ -27,6 +27,11 @@ const CameraScreen = ({scanned, setScanned, setData}) => {
             {/* Top section */}
             <View style={{ width, height: (height - innerSize) / 2, backgroundColor: "black", opacity: 0.5 }} />
 
+            {/* Close button */}
+            <TouchableOpacity style={styles.closeButton} onPress={() => setScanned(true)}>
+                <Text style={[sampleStyles.labelText, {fontSize: 40}]}>X</Text>
+            </TouchableOpacity>
+
             {/* Middle section (left + cutout + right) */}
             <View style={{ flexDirection: "row" }}>
                 <View style={{ width: (width - innerSize) / 2, height: innerSize, backgroundColor: "black", opacity: 0.5 }} />
@@ -46,16 +51,26 @@ const DataScreen = ({data, setScanned}) => {
         <View>
             <Text style={sampleStyles.labelText}>Barcode Data: </Text> 
             <Text style={sampleStyles.valueText}>{data}</Text>
-            <CustomLargeButton title={'Scan Again'} onPress={() => setScanned(false)} />
+            <CustomLargeButton title={data.length === 0 ? 'Scan' : 'Scan Again'} onPress={() => setScanned(false)} />
         </View>
     );
 }
 
-const ScannerScreen = () => {
+const ScannerScreen = ({route, navigation}) => {
     // states for camera permissions and settings
     const [perms, reqPerms] = useCameraPermissions();
-    const [scanned, setScanned] = React.useState(false);
+    const [scanned, setScanned] = React.useState(true);
     const [data, setData] = React.useState('');
+
+    // hide the header when camera screen activates
+    React.useEffect(() => {
+        if(!scanned) {
+            navigation.setOptions({headerShown: false});  
+        } else {
+            navigation.setOptions({headerShown: true});
+        }
+        [navigation, route.params?.headerShown]
+    }, [scanned])
 
     if (!perms) {
         return <View />;
@@ -89,6 +104,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
+    closeButton: {
+        position: 'absolute',
+        right: 15,
+        top: 60,
+    }
 })
 
 export default ScannerScreen;

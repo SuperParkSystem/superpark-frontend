@@ -22,6 +22,7 @@ const DrawerScreens = () => {
                   />
                 )
               }}
+              initialParams={{headerShown: true}}
             />
           ))
         }

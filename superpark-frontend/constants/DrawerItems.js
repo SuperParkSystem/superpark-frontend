@@ -1,9 +1,7 @@
 import PaymentScreen from "../screens/Payment"
 import ProfileScreen from "../screens/Profile"
 import SettingScreen from "../screens/Settings"
-import ScannerScreen from "../screens/Scanner"
-
-// uses https://icons.expo.fyi/Index for icons
+import PaymentScreen from "../screens/Paymentbak"
 
 export default [
     {
@@ -19,7 +17,7 @@ export default [
     {
         name: 'Payment',
         component: PaymentScreen,
-        iconName: 'logo-paypal'
+        iconName: 'card-outline'
     },
     {
         name: 'Scanner',

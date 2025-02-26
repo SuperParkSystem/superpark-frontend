@@ -1,5 +1,6 @@
 import ProfileScreen from "../screens/Profile"
 import SettingScreen from "../screens/Settings"
+import PaymentScreen from "../screens/Paymentbak"
 
 export default [
     {
@@ -12,4 +13,9 @@ export default [
         component: SettingScreen,
         iconName: 'settings'
     },
+    {
+        name: 'Payment',
+        component: PaymentScreen,
+        iconName: 'card-outline'
+    }
 ]

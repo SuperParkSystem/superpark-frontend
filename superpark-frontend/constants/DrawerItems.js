@@ -1,3 +1,4 @@
+import PaymentScreen from "../screens/Payment"
 import ProfileScreen from "../screens/Profile"
 import SettingScreen from "../screens/Settings"
 import PaymentScreen from "../screens/Paymentbak"
@@ -17,5 +18,10 @@ export default [
         name: 'Payment',
         component: PaymentScreen,
         iconName: 'card-outline'
-    }
+    },
+    {
+        name: 'Scanner',
+        component: ScannerScreen,
+        iconName: 'scan'
+    },
 ]

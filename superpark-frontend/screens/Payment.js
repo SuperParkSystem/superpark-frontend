@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Button, Platform, Modal } from 'react-native';
+import { jsPDF } from 'jspdf';
 
 import {CustomButton} from "../components/Button";
 import sampleStyles from "../constants/SampleStyles";
 import { modernColors } from '../constants/Colors';
 
-const PaymentConfirmation = ({ amountPaid, paymentMethod, invoiceNumber, date, setVis }) => {
+const generateCertificate = ({sessionId, driverId, duration, cost}) => {
+    const doc = new jsPDF();
+
+    doc.text(`RECEIPT`, 10, 10);
+    doc.text(`Session ID: ${sessionId}`, 20, 20);
+    doc.text(`Driver ID: ${driverId}`, 20, 25);
+    doc.text(`Duration: ${duration[0]}hr ${duration[1]}min ${duration[2]}sec`, 20, 30);
+    doc.text(`Cost: ${cost}`, 20, 35);
+
+    doc.save("receipt.pdf");
+};
+
+const PaymentConfirmation = ({ sessionId, driverId, duration, cost, setVis }) => {
     const [hovered, setHovered] = useState(null);
     const [clicked, setClicked] = useState(null);
 
@@ -24,8 +37,8 @@ const PaymentConfirmation = ({ amountPaid, paymentMethod, invoiceNumber, date, s
                     onMouseEnter={() => setHovered('amount')} 
                     onMouseLeave={() => setHovered(null)}
                 >
-                    <Text style={styles.labelText}>Amount Paid:</Text>
-                    <Text style={styles.valueText}>${amountPaid}</Text>
+                    <Text style={styles.labelText}>Session ID:</Text>
+                    <Text style={styles.valueText}>${sessionId}</Text>
                 </View>
                 
                 <View 
@@ -33,8 +46,8 @@ const PaymentConfirmation = ({ amountPaid, paymentMethod, invoiceNumber, date, s
                     onMouseEnter={() => setHovered('method')} 
                     onMouseLeave={() => setHovered(null)}
                 >
-                    <Text style={styles.labelText}>Payment Method:</Text>
-                    <Text style={styles.valueText}>{paymentMethod}</Text>
+                    <Text style={styles.labelText}>Driver ID:</Text>
+                    <Text style={styles.valueText}>{driverId}</Text>
                 </View>
                 
                 <View 
@@ -42,8 +55,8 @@ const PaymentConfirmation = ({ amountPaid, paymentMethod, invoiceNumber, date, s
                     onMouseEnter={() => setHovered('invoice')} 
                     onMouseLeave={() => setHovered(null)}
                 >
-                    <Text style={styles.labelText}>Invoice Number:</Text>
-                    <Text style={styles.valueText}>{invoiceNumber}</Text>
+                    <Text style={styles.labelText}>Duration:</Text>
+                    <Text style={styles.valueText}>{duration[0] + "hr " + duration[1] + "min " + duration[2] + "sec"}</Text>
                 </View>
                 
                 <View 
@@ -51,8 +64,8 @@ const PaymentConfirmation = ({ amountPaid, paymentMethod, invoiceNumber, date, s
                     onMouseEnter={() => setHovered('date')} 
                     onMouseLeave={() => setHovered(null)}
                 >
-                    <Text style={styles.labelText}>Date:</Text>
-                    <Text style={styles.valueText}>{date}</Text>
+                    <Text style={styles.labelText}>Cost:</Text>
+                    <Text style={styles.valueText}>{cost}</Text>
                 </View>
                 
                 <Text style={styles.thankYouText}>Thank you for using our service!</Text>
@@ -60,7 +73,9 @@ const PaymentConfirmation = ({ amountPaid, paymentMethod, invoiceNumber, date, s
                 
                 <TouchableOpacity 
                     style={[styles.confirmButton, clicked === 'receipt' && styles.clickedEffect]}
-                    onPress={() => setClicked('receipt')}
+                    onPress={() => {setClicked('receipt'), 
+                        generateCertificate({sessionId, driverId, duration, cost})
+                    }}
                 >
                     <Text style={styles.buttonText}>Download Receipt</Text>
                 </TouchableOpacity>
@@ -84,6 +99,9 @@ const PaymentScreen = () => {
     const [durationMin, setDurationMin] = useState(13);
     const [durationSec, setDurationSec] = useState(54);
     const [rate, setRate] = useState(3.4);
+    const [cost, setCost] = useState(rate * (durationHr * 3600 + durationMin * 60 + durationSec));
+    const [driverId, setDID] = useState(5)
+    const [sessionID, setSID] = useState(17);
 
     // popup state
     const [modalVis, setModalVis] = useState(false);
@@ -92,22 +110,22 @@ const PaymentScreen = () => {
         <View style={sampleStyles.container}>
             <View style={sampleStyles.textView}>
                 <Text style={sampleStyles.labelText}>Session ID: </Text>
-                <Text style={sampleStyles.valueText}>{5}</Text>
+                <Text style={sampleStyles.valueText}>{sessionID}</Text>
             </View>
 
             <View style={sampleStyles.textView}>
                 <Text style={sampleStyles.labelText}>Driver ID: </Text>
-                <Text style={sampleStyles.valueText}>{17}</Text>
+                <Text style={sampleStyles.valueText}>{driverId}</Text>
             </View>
 
             <View style={sampleStyles.textView}>
                 <Text style={sampleStyles.labelText}>Duration: </Text>
-                <Text style={sampleStyles.valueText}>{durationHr} hr {durationMin} min {durationSec} sec</Text>
+                <Text style={sampleStyles.valueText}>{durationHr}hr {durationMin}min {durationSec}sec</Text>
             </View>
 
             <View style={sampleStyles.textView}>
                 <Text style={sampleStyles.labelText}>Cost: </Text>
-                <Text style={sampleStyles.valueText}> {(durationHr * 3600 + durationMin * 60 + durationSec) * rate}</Text>
+                <Text style={sampleStyles.valueText}> {cost}</Text>
             </View>
 
             <View style={sampleStyles.textView}>
@@ -115,7 +133,11 @@ const PaymentScreen = () => {
             </View>
 
             <Modal visible={modalVis}>
-                <PaymentConfirmation 
+                <PaymentConfirmation
+                sessionId={sessionID}
+                driverId={driverId}
+                duration={[durationHr, durationMin, durationSec]}
+                cost={cost}
                 setVis={setModalVis}
                 />
             </Modal>
@@ -234,6 +256,15 @@ const styles = StyleSheet.create({
         color: modernColors.buttonText,
         fontWeight: 'bold',
     },
+    page: {
+        flexDirection: 'row',
+        backgroundColor: '#E4E4E4'
+    },
+    section: {
+        margin: 10,
+        padding: 10,
+        flexGrow: 1
+    }
 });
 
 export default PaymentScreen;

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Linking } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+
+import { useAuth } from '../../context/AuthContext';
 
 // Login Container
-const LoginContainer = ({ onLogin }) => {
+const LoginContainer = ({ onLogin, navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation(); // Use navigation hook
 
   const handleLogin = () => {
     if (username && password) {
@@ -37,7 +37,7 @@ const LoginContainer = ({ onLogin }) => {
       <TouchableOpacity style={styles.buttonContainer} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
         <Text style={styles.linkText}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
     </View>
@@ -45,13 +45,16 @@ const LoginContainer = ({ onLogin }) => {
 };
 
 // Main Greeter Component
-const Greeter = () => {
+const LoginScreen = ({navigation}) => {
   const [screen, setScreen] = useState('login'); // Changed initial state to "login"
-  const navigation = useNavigation(); // Use navigation hook
+
+  //TEMP code for auth
+  const {setAuth} = useAuth();
 
   const handleLoginSuccess = () => {
     // This function can remain empty as we're now navigating directly to the backend
     // Or you could use it for additional actions if needed
+    setAuth(true);
   };
 
   if (screen === 'welcome') {
@@ -71,7 +74,7 @@ const Greeter = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.subContainer}>
-        <LoginContainer onLogin={handleLoginSuccess} />
+        <LoginContainer onLogin={handleLoginSuccess} navigation={navigation} />
       </View>
     </View>
   );
@@ -145,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Greeter;
+export default LoginScreen;

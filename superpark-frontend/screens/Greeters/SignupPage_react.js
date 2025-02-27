@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert, Linking } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 
-const SignupPage = () => {
-  const navigation = useNavigation(); // Initialize navigation
+const SignupPage = ({navigation}) => {
 
   // Form state
   const [formData, setFormData] = useState({

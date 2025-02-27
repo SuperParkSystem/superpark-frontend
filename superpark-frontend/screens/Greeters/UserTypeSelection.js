@@ -1,9 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-const UserTypeSelection = () => {
-  const navigation = useNavigation();
+const UserTypeSelection = ({navigation}) => {
 
   return (
     <View style={styles.container}>

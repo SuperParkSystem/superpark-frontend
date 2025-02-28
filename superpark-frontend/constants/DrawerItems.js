@@ -3,7 +3,7 @@ import ProfileScreen from "../screens/Profile"
 import SettingScreen from "../screens/Settings"
 import ScannerScreen from "../screens/Scanner"
 
-import SignupPage from "../screens/Greeters/SignupPage_react"
+import SignupPage from "../screens/Greeters/SignupPage"
 import UserTypeSelection from "../screens/Greeters/UserTypeSelection"
 import Greeter from "../screens/Greeters/Login"
 

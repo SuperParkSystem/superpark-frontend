@@ -1,5 +1,5 @@
 import React, { use, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Button, Platform, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Platform, Modal } from 'react-native';
 import { jsPDF } from 'jspdf';
 
 import {CustomButton} from "../components/Button";
@@ -7,7 +7,7 @@ import sampleStyles from "../constants/SampleStyles";
 import { modernColors } from '../constants/Colors';
 
 const generateCertificate = ({sessionId, driverId, duration, cost}) => {
-    const doc = new jsPDF();
+        const doc = new jsPDF();
 
     doc.text(`RECEIPT`, 10, 10);
     doc.text(`Session ID: ${sessionId}`, 20, 20);
@@ -15,7 +15,11 @@ const generateCertificate = ({sessionId, driverId, duration, cost}) => {
     doc.text(`Duration: ${duration[0]}hr ${duration[1]}min ${duration[2]}sec`, 20, 30);
     doc.text(`Cost: ${cost}`, 20, 35);
 
-    doc.save("receipt.pdf");
+    if(Platform.OS === 'web') {
+        doc.save("receipt.pdf");
+    } else {
+        alert("PDF generation not possible on mobile devices");
+    }
 };
 
 const PaymentConfirmation = ({ sessionId, driverId, duration, cost, setVis }) => {

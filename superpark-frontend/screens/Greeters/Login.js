@@ -1,80 +1,88 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 
 import { useAuth } from '../../context/AuthContext';
 
+// function to authenticate user when logging in
+const authLogin = async ({username, password, setWrong, setAuth}) => {
+
+  try {
+    const res = await fetch('https://superpark-backend.onrender.com/auth/driver/token', {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'email': `${username}`,
+        'password': `${password}`
+      })
+    });
+
+    // check if status if ok
+    if(res.status === 201) {
+      const js = await res.json();
+
+      if(Platform.OS === 'web') {
+        localStorage.setItem('token', js.token);
+      }
+
+      setAuth(true);
+    } else {
+      setWrong(true);
+    }
+  } catch(err) {
+    console.error("error", err);
+  }
+}
+
+
 // Login Container
-const LoginContainer = ({ onLogin, navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [wrong, setWrong] = useState(false);
 
-  const handleLogin = () => {
-    if (username && password) {
-      console.log('User logged in successfully');
-      // Navigate to backend URL
-      Linking.openURL('https://superpark-backend.onrender.com/');
-      onLogin();
-    } else {
-      alert('Please enter both username and password.');
-    }
-  };
-
-  return (
-    <View style={styles.loginSignContainer}>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Enter Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.buttonContainer} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
-        <Text style={styles.linkText}>Don't have an account? Sign up</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-// Main Greeter Component
-const LoginScreen = ({navigation}) => {
-  const [screen, setScreen] = useState('login'); // Changed initial state to "login"
-
-  //TEMP code for auth
+  //TEMP auth effect to move to content screens
   const {setAuth} = useAuth();
 
-  const handleLoginSuccess = () => {
-    // This function can remain empty as we're now navigating directly to the backend
-    // Or you could use it for additional actions if needed
-    setAuth(true);
-  };
-
-  if (screen === 'welcome') {
-    return (
-      <View style={styles.mainContainer}>
-        <View style={styles.subContainer}>
-          <Text style={styles.welcomeText}>Welcome!</Text>
-          <Text style={styles.welcomeSubText}>You are now logged in.</Text>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => setScreen('login')}>
-            <Text style={styles.buttonText}>Logout</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
+  // Hook to alert that username or password is wrong
+  React.useEffect(() => {
+    if(wrong == true) {
+      alert("Wrong username or password");
+    }
+    setWrong(false);
+  }, [wrong]); 
 
   return (
     <View style={styles.mainContainer}>
       <View style={styles.subContainer}>
-        <LoginContainer onLogin={handleLoginSuccess} navigation={navigation} />
+        <View style={styles.loginSignContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Username"
+            value={username}
+            onChangeText={setUsername}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <TouchableOpacity style={styles.buttonContainer} 
+          onPress={async () => {(username === '' || password === '')?
+          alert("Username and password field should not be empty")
+          :
+          authLogin({username, password, setWrong, setAuth})
+          }}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
+            <Text style={styles.linkText}>Don't have an account? Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

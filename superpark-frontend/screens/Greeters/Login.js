@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 
 import { useAuth } from '../../context/AuthContext';
 
@@ -22,7 +22,10 @@ const authLogin = async ({username, password, setWrong, setAuth}) => {
     // check if status if ok
     if(res.status === 201) {
       const js = await res.json();
-      localStorage.setItem('token', js);
+
+      if(Platform.OS === 'web') {
+        localStorage.setItem('token', js.token);
+      }
 
       setAuth(true);
     } else {
@@ -35,7 +38,7 @@ const authLogin = async ({username, password, setWrong, setAuth}) => {
 
 
 // Login Container
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ navigation, route }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [wrong, setWrong] = useState(false);

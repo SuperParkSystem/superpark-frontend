@@ -1,8 +1,38 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert, Linking } from 'react-native';
+import React, { use, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
-const SignupPage = ({navigation}) => {
+const signupAPI = async ({userType, formData, setSuccess}) => {
+  const driverURL = 'https://superpark-backend.onrender.com/auth/driver';
+  const productOwnerURL = 'https://superpark-backend.onrender.com/auth/parkingOwner';
+
+  const url = (userType === 'Driver'?driverURL:(userType==='Parking Lot Owner')?productOwnerURL:'');
+
+  // make api call to backend to register new user
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'accept': '*/*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      'email': `${formData.email}`,
+      'password': `${formData.password}`,
+    })
+  });
+  // parse response
+  if(res.status === 400) {
+    setSuccess(-1);
+  } else {
+    // Form is valid, proceed with submission
+    setSuccess(1);
+  }
+}
+
+const SignupPage = ({navigation, route}) => {
+
+  // get user type from route
+  const {userType} = route.params;
 
   // Form state
   const [formData, setFormData] = useState({
@@ -52,32 +82,14 @@ const SignupPage = ({navigation}) => {
   // Handle form submission
   const handleSubmit = async ({email, password}) => {
     if (validateForm()) {
-      // make api call to backend to register new user
-      const res = await fetch('https://superpark-backend.onrender.com/auth/driver', {
-        method: 'PUT',
-        headers: {
-          'accept': '*/*',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          'email': `${formData.email}`,
-          'password': `${formData.password}`,
-        })
-      });
-      // parse response
-      if(res.status === 400) {
-        setSuccess(-1);
-      } else {
-        // Form is valid, proceed with submission
-        setSuccess(1);
-      }
+      await signupAPI({userType, formData, setSuccess});
     }
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.formContainer}>
-        <Text style={styles.title}>Create Account</Text>
+        <Text style={styles.title}>Create {userType} Account</Text>
 
         {(success == 1) && (
           <View style={styles.successMessage}>
@@ -130,7 +142,7 @@ const SignupPage = ({navigation}) => {
           Already have an account?{' '}
           <Text 
             style={styles.loginLink} 
-            onPress={() => navigation.navigate('Login')} // Navigate to Login page
+            onPress={() => navigation.navigate('Login', {userType: userType})} // Navigate to Login page
           >
             Log In
           </Text>

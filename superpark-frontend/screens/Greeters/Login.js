@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import sampleStyles from '../../constants/SampleStyles';
 
 import { useAuth } from '../../context/AuthContext';
 
 // function to authenticate user when logging in
-const authLogin = async ({username, password, setWrong, setAuth}) => {
-
+const authLogin = async ({username, password, setWrong, setAuth, userType}) => {
   try {
-    const res = await fetch('https://superpark-backend.onrender.com/auth/driver/token', {
+    const driverURL = 'https://superpark-backend.onrender.com/auth/driver/token';
+    const productOwnerURL = 'https://superpark-backend.onrender.com/auth/parkingOwner/token';
+
+    const url = (userType === 'Driver'?driverURL:(userType==='Parking Lot Owner')?productOwnerURL:'');
+
+    const res = await fetch(url, {
       method: 'POST',
       headers: {
         'accept': 'application/json',
@@ -18,6 +23,8 @@ const authLogin = async ({username, password, setWrong, setAuth}) => {
         'password': `${password}`
       })
     });
+
+    console.log(res);
 
     // check if status if ok
     if(res.status === 201) {
@@ -43,8 +50,11 @@ const LoginScreen = ({ navigation, route }) => {
   const [password, setPassword] = useState('');
   const [wrong, setWrong] = useState(false);
 
-  //TEMP auth effect to move to content screens
+  //auth login effect to move to content screens
   const {setAuth} = useAuth();
+
+  // get usertype param
+  const {userType} = route.params;
 
   // Hook to alert that username or password is wrong
   React.useEffect(() => {
@@ -58,6 +68,7 @@ const LoginScreen = ({ navigation, route }) => {
     <View style={styles.mainContainer}>
       <View style={styles.subContainer}>
         <View style={styles.loginSignContainer}>
+          <Text style={sampleStyles.labelText}>{userType} Login</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter Username"
@@ -75,11 +86,11 @@ const LoginScreen = ({ navigation, route }) => {
           onPress={async () => {(username === '' || password === '')?
           alert("Username and password field should not be empty")
           :
-          authLogin({username, password, setWrong, setAuth})
+          await authLogin({username, password, setWrong, setAuth, userType})
           }}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Sign Up')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Sign Up', {userType: userType})}>
             <Text style={styles.linkText}>Don't have an account? Sign up</Text>
           </TouchableOpacity>
         </View>
@@ -120,6 +131,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderWidth: 1,
     borderColor: '#007BFF',
+    marginTop: 5,
     marginBottom: 15,
     fontSize: 16,
     color: '#333',

@@ -27,6 +27,7 @@ const validSession = () => {
     if(Platform.OS === 'web') {
         return (localStorage.getItem('token') != null)
     } else {
+        //TEMP CODE TO ALLOW AUTOMATIC LOGIN FOR PHONE
         return true;
     }
 }

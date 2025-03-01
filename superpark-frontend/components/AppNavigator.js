@@ -24,8 +24,24 @@ const linking = {
 
 // function to check if login sesion is valid
 const validSession = () => {
+    // stores 600,000 ms = 10 min
+    const duration = 600000;
+
     if(Platform.OS === 'web') {
-        return (localStorage.getItem('token') != null)
+        const tok = JSON.parse(localStorage.getItem('SuperParkToken'));
+        if (tok === null) {
+            return false
+        } else {
+            // if time duration exceeded, token not valid
+            if (parseInt(Date.now()) - parseInt(tok.Timestamp, 10) > duration) {
+                return false
+            } else {
+                // refresh token timestamp and store it
+                tok.Timestamp = Date.now();
+                localStorage.setItem('SuperParkToken', JSON.stringify(tok));
+            }        
+        }
+        return true;
     } else {
         //TEMP CODE TO ALLOW AUTOMATIC LOGIN FOR PHONE
         return true;

@@ -90,8 +90,13 @@ const LoginScreen = ({ navigation, route }) => {
           }}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
+
           <TouchableOpacity onPress={() => navigation.navigate('Sign Up', {userType: userType})}>
             <Text style={styles.linkText}>Don't have an account? Sign up</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => navigation.navigate('User Type')}>
+            <Text style={styles.linkText}>Select User Type again</Text>
           </TouchableOpacity>
         </View>
       </View>

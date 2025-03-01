@@ -147,6 +147,17 @@ const SignupPage = ({navigation, route}) => {
             Log In
           </Text>
         </Text>
+
+        {/* User Type Link */}
+        <Text style={styles.loginText}>
+          Select User Type again?{' '}
+          <Text 
+            style={styles.loginLink} 
+            onPress={() => navigation.navigate('User Type')} // Navigate to Login page
+          >
+            User Type
+          </Text>
+        </Text>
       </View>
     </ScrollView>
   );

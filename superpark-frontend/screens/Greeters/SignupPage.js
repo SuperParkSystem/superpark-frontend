@@ -1,5 +1,5 @@
 import React, { use, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Platform } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
 const signupAPI = async ({userType, formData, setSuccess}) => {
@@ -155,7 +155,7 @@ const SignupPage = ({navigation, route}) => {
             style={styles.loginLink} 
             onPress={() => navigation.navigate('User Type')} // Navigate to Login page
           >
-            User Type
+            User Types
           </Text>
         </Text>
       </View>
@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 5,
+    width: Platform.OS === 'web' ? '40%' : '100%'
   },
   title: {
     fontSize: 24,

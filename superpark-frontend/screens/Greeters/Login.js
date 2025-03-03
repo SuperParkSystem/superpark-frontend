@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   subContainer: {
-    width: '50%',
+    width:  Platform.OS === 'web' ? '50%' : '80%',
     borderWidth: 2,
     borderColor: '#007BFF',
     borderRadius: 10,

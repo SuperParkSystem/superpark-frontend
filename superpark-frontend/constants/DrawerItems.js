@@ -2,10 +2,7 @@ import PaymentScreen from "../screens/Payment"
 import ProfileScreen from "../screens/Profile"
 import SettingScreen from "../screens/Settings"
 import ScannerScreen from "../screens/Scanner"
-
-import SignupPage from "../screens/Greeters/SignupPage"
-import UserTypeSelection from "../screens/Greeters/UserTypeSelection"
-import Greeter from "../screens/Greeters/Login"
+import ParkingSpaceScreen from "../screens/ParkingSpace"
 
 // icons website: https://ionic.io/ionicons
 
@@ -29,5 +26,10 @@ export default [
         name: 'Scanner',
         component: ScannerScreen,
         iconName: 'scan'
+    },
+    {
+        name: 'Parking Spaces',
+        component: ParkingSpaceScreen,
+        iconName: 'grid-outline',
     }
 ]

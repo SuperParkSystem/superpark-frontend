@@ -3,6 +3,7 @@ import ProfileScreen from "../screens/Profile"
 import SettingScreen from "../screens/Settings"
 import ScannerScreen from "../screens/Scanner"
 import MapScreen from "../screens/Maps"
+import ParkingSpaceScreen from "../screens/ParkingSpace"
 
 // icons website: https://ionic.io/ionicons
 
@@ -31,5 +32,10 @@ export default [
         name: 'Maps',
         component: MapScreen,
         iconName:'map-outline'
+    },
+    {
+        name: 'Parking Spaces',
+        component: ParkingSpaceScreen,
+        iconName: 'grid-outline',
     }
 ]

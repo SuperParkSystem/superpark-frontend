@@ -1,22 +1,30 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const UserTypeSelection = ({navigation}) => {
+const UserTypeSelection = () => {
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Select User Type</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Login', { userType: 'User' })}
+        onPress={() => navigation.navigate('Login', { userType: 'Driver' })}
       >
-        <Text style={styles.buttonText}>User</Text>
+        <Text style={styles.buttonText}>Driver</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Login', { userType: 'Admin' })}
+        onPress={() => navigation.navigate('Login', { userType: 'Parking Lot Owner' })}
       >
-        <Text style={styles.buttonText}>Admin</Text>
+        <Text style={styles.buttonText}>Parking Lot Owner</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('Login', { userType: 'Product Owner' })}
+      >
+        <Text style={styles.buttonText}>Product Owner</Text>
       </TouchableOpacity>
     </View>
   );

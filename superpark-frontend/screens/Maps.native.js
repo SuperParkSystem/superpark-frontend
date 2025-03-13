@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Platform, Text } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 
 const MapScreen = () => {
 

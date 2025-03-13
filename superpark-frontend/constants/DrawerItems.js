@@ -4,6 +4,7 @@ import SettingScreen from "../screens/Settings"
 import ScannerScreen from "../screens/Scanner"
 import MapScreen from "../screens/Maps"
 import ParkingSpaceScreen from "../screens/ParkingSpace"
+import LogoutScreen from "../screens/Logout"
 
 // icons website: https://ionic.io/ionicons
 
@@ -37,5 +38,10 @@ export default [
         name: 'Parking Spaces',
         component: ParkingSpaceScreen,
         iconName: 'grid-outline',
+    },
+    {
+        name: 'Logout Screen',
+        component: LogoutScreen,
+        iconName: 'log-out-outline',
     }
 ]

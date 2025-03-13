@@ -1,23 +1,15 @@
 import React from "react";
-import { View } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import { View, Platform, Text } from "react-native";
 
-const Maps = () => {
+import sampleStyles from "../constants/SampleStyles";
+
+// component for web map page
+const MapScreen = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <MapView
-        style={{ flex: 1 }}
-        initialRegion={{
-          latitude: 11.016844,
-          longitude: 76.955833,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        <Marker coordinate={{ latitude: 11.016844, longitude: 76.955833 }} />
-      </MapView>
+    <View style={sampleStyles.container}>
+      <Text style={sampleStyles.labelText}>Maps is supported only in Android or IOS devices </Text>
     </View>
-  );
+  )
 };
 
-export default Maps;
+export default MapScreen;

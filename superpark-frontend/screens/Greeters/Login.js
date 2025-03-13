@@ -8,9 +8,10 @@ import { useAuth } from '../../context/AuthContext';
 const authLogin = async ({username, password, setWrong, setAuth, userType}) => {
   try {
     const driverURL = 'https://superpark-backend.onrender.com/auth/driver/token';
-    const productOwnerURL = 'https://superpark-backend.onrender.com/auth/parkingOwner/token';
+    const parkingOwnerURL = 'https://superpark-backend.onrender.com/auth/parkingOwner/token';
+    const productOwnerURL = 'https://superpark-backend.onrender.com/auth/productOwner/token';
 
-    const url = (userType === 'Driver'?driverURL:(userType==='Parking Lot Owner')?productOwnerURL:'');
+    const url = (userType === 'Driver'?driverURL:(userType==='Parking Lot Owner')?parkingOwnerURL:productOwnerURL);
 
     const res = await fetch(url, {
       method: 'POST',

@@ -4,9 +4,10 @@ import { useAuth } from '../../context/AuthContext';
 
 const signupAPI = async ({userType, formData, setSuccess}) => {
   const driverURL = 'https://superpark-backend.onrender.com/auth/driver';
-  const productOwnerURL = 'https://superpark-backend.onrender.com/auth/parkingOwner';
+  const parkingOwnerURL = 'https://superpark-backend.onrender.com/auth/parkingOwner';
+  const productOwnerURL = 'https://superpark-backend.onrender.com/auth/productOwner';
 
-  const url = (userType === 'Driver'?driverURL:(userType==='Parking Lot Owner')?productOwnerURL:'');
+  const url = (userType === 'Driver'?driverURL:(userType==='Parking Lot Owner')?parkingOwnerURL:productOwnerURL);
 
   // make api call to backend to register new user
   const res = await fetch(url, {

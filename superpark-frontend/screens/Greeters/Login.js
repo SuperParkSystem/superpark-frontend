@@ -33,6 +33,7 @@ const authLogin = async ({username, password, setWrong, setAuth, userType}) => {
 
       if(Platform.OS === 'web') {
         localStorage.setItem('SuperParkToken', JSON.stringify({"Token": js.token, "Timestamp": Date.now()}));
+        localStorage.setItem('UserType', userType)
       }
 
       setAuth(true);

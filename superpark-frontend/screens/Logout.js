@@ -9,6 +9,7 @@ const LogoutScreen = () => {
     // on web platform remove local storage token
     if(Platform.OS === 'web') {
         localStorage.removeItem('SuperParkToken');
+        localStorage.removeItem('UserType');
     }
 }
 

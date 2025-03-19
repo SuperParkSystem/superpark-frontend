@@ -27,7 +27,8 @@
     "react-native-gesture-handler": "~2.20.2",
     "react-native-maps": "^1.20.1",
     "react-native-reanimated": "~3.16.1",
-    "react-native-web": "~0.19.13"
+    "react-native-web": "~0.19.13",
+    "react-timer-hook": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

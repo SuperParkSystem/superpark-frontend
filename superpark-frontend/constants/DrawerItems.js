@@ -43,9 +43,5 @@ export default [
         name: 'Logout Screen',
         component: LogoutScreen,
         iconName: 'log-out-outline',
-    },
-    {
-        name: 'ParkingLotDetails',
-        component: ParkingLotDetails,
     }
 ]

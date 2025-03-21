@@ -3,13 +3,13 @@ import { Platform } from "react-native";
 
 const LogoutScreen = () => {
     const {setAuth} = useAuth();
-    
-    setAuth(false);
 
     // on web platform remove local storage token
     if(Platform.OS === 'web') {
         localStorage.removeItem('SuperParkToken');
     }
+
+    setAuth(false);
 }
 
 export default LogoutScreen;

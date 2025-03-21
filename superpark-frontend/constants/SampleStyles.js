@@ -6,6 +6,11 @@ const sampleStyles = {
         width: '100%',
         height: '100%',
     },
+    modalContainer: {
+        backgroundColor: bootstrapDarkColors.background,
+        width: '80%',
+        height: '50%',
+    },
     textView: {
         padding: 10,
         display: 'flex',

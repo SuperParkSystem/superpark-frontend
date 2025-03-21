@@ -1,15 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import sampleStyles from "../constants/SampleStyles";
+
 const ParkingLotDetails = ({ route }) => {
   const { lot } = route.params;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{lot.name}</Text>
-      <Text style={styles.detail}>Location: {lot.location}</Text>
-      <Text style={styles.detail}>Capacity: {lot.capacity}</Text>
-      <Text style={styles.detail}>Price: {lot.price}</Text>
+    <View style={sampleStyles.container}>
+      <Text style={sampleStyles.labelText}>{lot.name}</Text>
+      <Text style={sampleStyles.valueText}>Location: {lot.location}</Text>
+      <Text style={sampleStyles.valueText}>Capacity: {lot.capacity}</Text>
+      <Text style={sampleStyles.valueText}>Price: {lot.price}</Text>
     </View>
   );
 };

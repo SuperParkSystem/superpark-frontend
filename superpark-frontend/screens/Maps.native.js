@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Platform, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { useNavigation } from "@react-navigation/native";
+import Modal from "react-native-modal";
+
+import sampleStyles from "../constants/SampleStyles";
 
 const parkingLots = [
   { id: "1", name: "Central Parking", capacity: 100, location: "Downtown", price: "₹50/hr", latitude: 11.0172, longitude: 76.9559 },
@@ -12,11 +15,28 @@ const parkingLots = [
 ];
 
 const MapScreen = () => {
+  const [selectedLot, setSelectedLot] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   const navigation = useNavigation();
 
   if (Platform.OS === "ios" || Platform.OS === "android") {
     return (
       <View style={{ flex: 1 }}>
+        <Modal isVisible={showModal} onBackdropPress={() => setShowModal(false)}>
+        <View style={sampleStyles.modalContainer}>
+          {selectedLot && (
+            <>
+              <Text style={sampleStyles.labelText}>{selectedLot.name}</Text>
+              <Text style={sampleStyles.valueText}>Location: {selectedLot.latitude}, {selectedLot.longitude}</Text>
+              <Text style={sampleStyles.valueText}>Capacity: {selectedLot.capacity}</Text>
+              <Text style={sampleStyles.valueText}>Price: {selectedLot.price}</Text>
+            </>
+          )}
+        </View>
+</Modal>
+
+
         <MapView
           style={{ flex: 1 }}
           initialRegion={{
@@ -32,7 +52,10 @@ const MapScreen = () => {
               coordinate={{ latitude: lot.latitude, longitude: lot.longitude }}
               title={lot.name}
               description={`Capacity: ${lot.capacity}, Price: ${lot.price}`}
-              onPress={() => navigation.navigate("ParkingLotDetails", { lot })}
+              onPress={() => {
+                setSelectedLot(lot),
+                setShowModal(true)
+              }}
             />
           ))}
         </MapView>

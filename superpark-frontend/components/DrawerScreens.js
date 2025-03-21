@@ -2,9 +2,9 @@ import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 
-import DriverDrawerItems from '../constants/DriverDrawerItems';
-import ProductOwnerDrawerItems from '../constants/ProductOwnerDrawerItems';
-import ParkingOwnerDrawerItems from '../constants/ParkingOwnerDrawerItems';
+import DriverDrawerItems from '../constants/DrawerItems/DriverDrawerItems';
+import ProductOwnerDrawerItems from '../constants/DrawerItems/ProductOwnerDrawerItems';
+import ParkingOwnerDrawerItems from '../constants/DrawerItems/ParkingOwnerDrawerItems';
 
 const Drawer = createDrawerNavigator();
 

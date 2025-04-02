@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { Platform } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
+import * as SecureStore from 'expo-secure-store';
 
 import DriverDrawerItems from '../constants/DrawerItems/DriverDrawerItems';
 import ProductOwnerDrawerItems from '../constants/DrawerItems/ProductOwnerDrawerItems';
@@ -10,8 +12,13 @@ const Drawer = createDrawerNavigator();
 
 const DrawerScreens = () => {
 
-  const usertype = localStorage.getItem('UserType');
-
+  var usertype;
+  if(Platform.OS === 'web') {
+    usertype = localStorage.getItem('UserType');
+  } else if (Platform.OS === 'android' || Platform.OS === 'ios') {
+    usertype = SecureStore.getItem('UserType');
+  }
+  
   if(usertype === 'Driver') {
     return (
       <Drawer.Navigator>

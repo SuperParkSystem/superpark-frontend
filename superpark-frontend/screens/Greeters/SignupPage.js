@@ -1,6 +1,5 @@
 import React, { use, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Platform } from 'react-native';
-import { useAuth } from '../../context/AuthContext';
 
 const signupAPI = async ({userType, formData, setSuccess}) => {
   const driverURL = 'https://superpark-backend.onrender.com/auth/driver';

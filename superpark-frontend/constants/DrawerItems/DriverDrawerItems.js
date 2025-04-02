@@ -1,5 +1,5 @@
 import PaymentScreen from "../../screens/Payment"
-import ProfileScreen from "../../screens/Profile"
+import DriverProfileScreen from "../../screens/DriverProfile"
 import SettingScreen from "../../screens/Settings"
 import ScannerScreen from "../../screens/Scanner"
 import MapScreen from "../../screens/Maps"
@@ -10,7 +10,7 @@ import LogoutScreen from "../../screens/Logout"
 export default [
     {
         name: 'Profile',
-        component: ProfileScreen,
+        component: DriverProfileScreen,
         iconName: 'home'
     },
     {

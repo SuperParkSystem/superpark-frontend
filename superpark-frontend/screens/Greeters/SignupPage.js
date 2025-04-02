@@ -21,7 +21,7 @@ const signupAPI = async ({userType, formData, setSuccess}) => {
     })
   });
   // parse response
-  if(res.status === 400) {
+  if(res.status === 400 || res.status === 500) {
     setSuccess(-1);
   } else {
     // Form is valid, proceed with submission

@@ -36,11 +36,13 @@ const sampleStyles = {
     },
     largeButton: {
         width: 120,
-        height: 40,
+        height: 60,
         backgroundColor: bootstrapDarkColors.primary,
         paddingVertical: 10,
         paddingHorizontal: 10,
         borderRadius: 5,
+        textAlign: 'center',
+        alignItems: 'center',
     },
     buttonText: {
         color: bootstrapDarkColors.text,

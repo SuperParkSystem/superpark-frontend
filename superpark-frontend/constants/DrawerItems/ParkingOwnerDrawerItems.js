@@ -1,7 +1,7 @@
-import ProfileScreen from "../screens/Profile"
-import SettingScreen from "../screens/Settings"
-import ParkingSpaceScreen from "../screens/ParkingSpace"
-import LogoutScreen from "../screens/Logout"
+import ProfileScreen from "../../screens/Profile"
+import SettingScreen from "../../screens/Settings"
+import ParkingSpaceScreen from "../../screens/ParkingSpace"
+import LogoutScreen from "../../screens/Logout"
 
 // icons website: https://ionic.io/ionicons
 

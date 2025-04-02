@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import sampleStyles from '../../constants/SampleStyles';
 
+import * as SecureStore from 'expo-secure-store';
+
+import sampleStyles from '../../constants/SampleStyles';
 import { useAuth } from '../../context/AuthContext';
 
 // function to authenticate user when logging in
@@ -34,6 +36,9 @@ const authLogin = async ({username, password, setWrong, setAuth, userType}) => {
       if(Platform.OS === 'web') {
         localStorage.setItem('SuperParkToken', JSON.stringify({"Token": js.token, "Timestamp": Date.now()}));
         localStorage.setItem('UserType', userType)
+      } else if(Platform.OS === 'android' || Platform.OS === 'ios') {
+        SecureStore.setItem('SuperParkToken', JSON.stringify({"Token": js.token, "Timestamp": Date.now()}));
+        SecureStore.setItem('UserType', userType);
       }
 
       setAuth(true);

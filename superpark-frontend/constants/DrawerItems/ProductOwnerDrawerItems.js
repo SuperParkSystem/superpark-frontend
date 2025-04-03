@@ -1,5 +1,6 @@
-import ProfileScreen from "../../screens/Profile"
+import ProductProfileScreen from "../../screens/Profile/ProductProfile"
 import SettingScreen from "../../screens/Settings"
+import RealTimeScreen from "../../screens/RealTime"
 import MapScreen from "../../screens/Maps"
 import LogoutScreen from "../../screens/Logout"
 
@@ -8,7 +9,7 @@ import LogoutScreen from "../../screens/Logout"
 export default [
     {
         name: 'Profile',
-        component: ProfileScreen,
+        component: ProductProfileScreen,
         iconName: 'home'
     },
     {
@@ -20,6 +21,11 @@ export default [
         name: 'Maps',
         component: MapScreen,
         iconName:'map-outline'
+    },
+    {
+        name: 'Real Time Data',
+        component: RealTimeScreen,
+        iconName: 'analytics-outline',
     },
     {
         name: 'Logout Screen',

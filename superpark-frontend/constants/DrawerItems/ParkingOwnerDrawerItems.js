@@ -1,4 +1,4 @@
-import ProfileScreen from "../../screens/Profile"
+import ParkingProfileScreen from "../../screens/Profile/ParkingProfile"
 import SettingScreen from "../../screens/Settings"
 import ParkingSpaceScreen from "../../screens/ParkingSpace"
 import LogoutScreen from "../../screens/Logout"
@@ -8,7 +8,7 @@ import LogoutScreen from "../../screens/Logout"
 export default [
     {
         name: 'Profile',
-        component: ProfileScreen,
+        component: ParkingProfileScreen,
         iconName: 'home'
     },
     {

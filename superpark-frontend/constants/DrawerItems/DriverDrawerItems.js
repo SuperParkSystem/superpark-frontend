@@ -1,5 +1,5 @@
 import PaymentScreen from "../../screens/Payment"
-import DriverProfileScreen from "../../screens/DriverProfile"
+import DriverProfileScreen from "../../screens/Profile/DriverProfile"
 import SettingScreen from "../../screens/Settings"
 import ScannerScreen from "../../screens/Scanner"
 import MapScreen from "../../screens/Maps"

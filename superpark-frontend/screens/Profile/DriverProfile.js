@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import {View, Text, TextInput, StyleSheet, Platform, Button, Touchable, TouchableOpacity} from "react-native";
 
-import sampleStyles from '../constants/SampleStyles';
-import { CustomButton, CustomLargeButton } from '../components/Button';
+import sampleStyles from '../../constants/SampleStyles';
+import { CustomButton, CustomLargeButton } from '../../components/Button';
 
 // Function to submit the feedback and store it in the database
 const sumbitFeedback = ({feedback, email}) => {

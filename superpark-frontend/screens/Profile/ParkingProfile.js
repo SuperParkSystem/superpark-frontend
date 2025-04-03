@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {View, Text} from "react-native";
 
-import sampleStyles from '../constants/SampleStyles';
+import sampleStyles from '../../constants/SampleStyles';
 
-function ProfileScreen() {
+const ParkingProfileScreen = () => {
   
     return (
       <View style={sampleStyles.container}>
@@ -12,4 +12,4 @@ function ProfileScreen() {
     );
 }
 
-export default ProfileScreen;
+export default ParkingProfileScreen;

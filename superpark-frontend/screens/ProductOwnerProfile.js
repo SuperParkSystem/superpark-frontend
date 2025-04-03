@@ -15,10 +15,9 @@ function ProfileScreen() {
 export default ProfileScreen;
 
 function ProfilePage() {
-  const [name, setName] = useState("user");
-  const [email, setEmail] = useState("user@gmail.com");
+  const [name, setName] = useState("Owner");
+  const [email, setEmail] = useState("owner@gmail.com");
   const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
   const [avatar, setAvatar] = useState(null);
 
   const handleAvatarChange = (event) => {
@@ -47,7 +46,6 @@ function ProfilePage() {
           <input style={{ padding: "8px", border: "1px solid #555", backgroundColor: "#2b2b2b", color: "white", borderRadius: "8px", width: "100%" }} value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
           <input style={{ padding: "8px", border: "1px solid #555", backgroundColor: "#2b2b2b", color: "white", borderRadius: "8px", width: "100%" }} type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
           <input style={{ padding: "8px", border: "1px solid #555", backgroundColor: "#2b2b2b", color: "white", borderRadius: "8px", width: "100%" }} type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="New Password" />
-          <input style={{ padding: "8px", border: "1px solid #555", backgroundColor: "#2b2b2b", color: "white", borderRadius: "8px", width: "100%" }} value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
           <button style={{ width: "100%", backgroundColor: "#4f83ff", color: "white", padding: "12px", borderRadius: "8px", marginTop: "8px", border: "none", cursor: "pointer" }}>Save Changes</button>
         </div>
       </div>

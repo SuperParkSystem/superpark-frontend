@@ -29,8 +29,8 @@ const DriverProfileScreen = () => {
   }, [])
 
   const [feedback, setFeedback] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState('d@gmail.com');
+  const [name, setName] = useState('Driver 1');
 
 
     return (

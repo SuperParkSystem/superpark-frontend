@@ -14,11 +14,6 @@ export default [
         iconName: 'home'
     },
     {
-        name: 'Settings',
-        component: SettingScreen,
-        iconName: 'settings'
-    },
-    {
         name: 'Payment',
         component: PaymentScreen,
         iconName: 'card-outline'

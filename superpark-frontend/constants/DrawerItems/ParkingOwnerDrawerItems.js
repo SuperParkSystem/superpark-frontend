@@ -12,11 +12,6 @@ export default [
         iconName: 'home'
     },
     {
-        name: 'Settings',
-        component: SettingScreen,
-        iconName: 'settings'
-    },
-    {
         name: 'Parking Spaces',
         component: ParkingSpaceScreen,
         iconName: 'grid-outline',

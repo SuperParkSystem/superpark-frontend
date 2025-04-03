@@ -13,11 +13,6 @@ export default [
         iconName: 'home'
     },
     {
-        name: 'Settings',
-        component: SettingScreen,
-        iconName: 'settings'
-    },
-    {
         name: 'Maps',
         component: MapScreen,
         iconName:'map-outline'
